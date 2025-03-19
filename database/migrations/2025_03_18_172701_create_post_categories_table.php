@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('post_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name',50);
+            $table->string('slug',50)->unique()->nullable();
+            $table->foreignId('parent_id')->nullable()->constrained('post_categories',);
             $table->timestamps();
+
         });
     }
 
