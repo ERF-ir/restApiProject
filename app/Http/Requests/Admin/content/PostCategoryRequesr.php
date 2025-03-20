@@ -19,10 +19,9 @@ class PostCategoryRequesr extends FormRequest
 
     public function failedValidation(Validator $validator )
     {
-        throw new HttpResponseException(response()->json([
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ],403));
+      throw new HttpResponseException(
+        respons('validation Error', $validator->errors(), 400)
+      );
     }
 
 

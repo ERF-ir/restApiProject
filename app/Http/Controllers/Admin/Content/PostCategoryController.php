@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin\Content;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\content\PostCategoryRequesr;
+use App\Http\Resources\Admin\Content\PostCategoryResource;
 use App\Models\content\PostCategory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class PostCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,28 +18,22 @@ class PostController extends Controller
     {
 
         $postCategories = PostCategory::with('parent')->get();
-        return response()->json(['data' => $postCategories]);
+        return respons('لیست دسته بندی پست ها',PostCategoryResource::collection($postCategories));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(PostCategoryRequesr $request)
     {
         $input = $request->all();
         PostCategory::create($input);
-        return response()->json(['message' => 'data created successfully']);
-
+       return respons('دسته بندی مورد نظر با موفقیت ساخته شد');
     }
 
     public function update(PostCategoryRequesr $request, PostCategory $postCategory)
     {
-
-        $input = $request->all();
-        $postCategory->update($input);
-
-        return response()->json(['message' => 'data updated successfully']);
-
+            $input = $request->all();
+            $postCategory->updatdssse($input);
+            return respons('ویرایش با موفقیت انجام شد');
     }
 
     /**
@@ -45,9 +41,7 @@ class PostController extends Controller
      */
     public function destroy(PostCategory $postCategory)
     {
-
         $postCategory->delete();
-        return response()->json(['message' => 'data deleted successfully']);
-
+        return respons('با موفقیت حذف شد');
     }
 }
