@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\content;
+namespace App\Http\Requests\Admin\Content;
 
 use http\Env\Request;
 use Illuminate\Contracts\Validation\Validator;

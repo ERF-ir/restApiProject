@@ -223,6 +223,9 @@ return [
         "passport_no" => "شماره پاسپورت",
         "sheba_number" => "شماره شبا",
         "iban" => "شماره شبا",
-        "accountـnumber" => "شماره حساب"
+        "image" => "تصویر",
+        "body" => "متن",
+        "status" => "وضعیت",
+        "summary" => "خلاصه"
     ],
 ];

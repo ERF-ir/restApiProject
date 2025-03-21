@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Content;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\content\PostCategoryRequesr;
+use App\Http\Requests\Admin\Content\PostCategoryRequesr;
 use App\Http\Resources\Admin\Content\PostCategoryResource;
 use App\Models\content\PostCategory;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -11,14 +11,11 @@ use Illuminate\Http\Request;
 
 class PostCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-
         $postCategories = PostCategory::with('parent')->get();
-        return respons('لیست دسته بندی پست ها',PostCategoryResource::collection($postCategories));
+        return respons('success',PostCategoryResource::collection($postCategories));
     }
 
 
@@ -28,6 +25,11 @@ class PostCategoryController extends Controller
         PostCategory::create($input);
        return respons('دسته بندی مورد نظر با موفقیت ساخته شد');
     }
+    
+    public function show(PostCategory $postCategory)
+    {
+       return respons('show post successfully',new PostCategoryResource($postCategory));
+    }
 
     public function update(PostCategoryRequesr $request, PostCategory $postCategory)
     {
@@ -36,9 +38,7 @@ class PostCategoryController extends Controller
             return respons('ویرایش با موفقیت انجام شد');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(PostCategory $postCategory)
     {
         $postCategory->delete();
