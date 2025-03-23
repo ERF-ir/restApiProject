@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with('category','user')->get();
-        return respons('created post successfully',PostResource::collection($posts));
+        return respons('success',PostResource::collection($posts));
     }
 
     
@@ -26,7 +26,7 @@ class PostController extends Controller
        $inputs['image'] = $path;
        
        Post::create($inputs);
-       return respons('پست با موفقیت ساخته شد');
+       return respons('created post successfully');
     
     }
 
