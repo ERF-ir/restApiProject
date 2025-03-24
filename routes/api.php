@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Content\BannerController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\PostController;
 use App\Http\Controllers\Admin\Store\BrandController;
+use App\Http\Controllers\Admin\Store\CouponDiscountController;
 use App\Http\Controllers\Admin\Store\PublicDiscountController;
 use App\Models\Store\Brand;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -16,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Store\ProductCategoryController;
 
 
-// content section
+#### content section
 Route::prefix('content')->group(function () {
 
-    //postCategory
+    //postCategory_______________________________________________________________________________________
     Route::prefix('post-category')->group(function () {
       
         Route::post('store',[PostCategoryController::class,'store']);
@@ -29,7 +30,7 @@ Route::prefix('content')->group(function () {
         Route::delete('{postCategory}',[PostCategoryController::class,'destroy']);
     });
     
-    //posts
+    //posts_______________________________________________________________________________________
     Route::prefix('post')->group(function () {
       
       Route::post('store',[PostController::class,'store']);
@@ -43,7 +44,7 @@ Route::prefix('content')->group(function () {
     });
    
    
-   //banners
+   //banners_______________________________________________________________________________________
    Route::prefix('banner')->group(function () {
       Route::post('store',[BannerController::class,'store']);
       Route::get('index',[BannerController::class,'index']);
@@ -53,7 +54,7 @@ Route::prefix('content')->group(function () {
    });
    
    
-   //menu
+   //menu_______________________________________________________________________________________
    Route::prefix('menu')->group(function () {
       Route::post('store',[MenuController::class,'store']);
       Route::get('index',[MenuController::class,'index']);
@@ -64,7 +65,7 @@ Route::prefix('content')->group(function () {
       
    });
    
-   //comments
+   //comments_______________________________________________________________________________________
    Route::prefix('comment')->group(function () {
       Route::get('index',[CommentController::class,'index']);
       Route::delete('{comment}',[CommentController::class,'destroy']);
@@ -75,10 +76,10 @@ Route::prefix('content')->group(function () {
 
 
 
-// product section
+#### product section
 Route::prefix('store')->group(function () {
    
-   //postCategory
+   //postCategory_______________________________________________________________________________________
    Route::prefix('product-category')->group(function () {
       
       Route::post('store',[ProductCategoryController::class,'store']);
@@ -90,7 +91,7 @@ Route::prefix('store')->group(function () {
    });
    
    
-   //brand
+   //brand_______________________________________________________________________________________
    Route::prefix('brand')->group(function () {
       
       Route::post('store',[BrandController::class,'store']);
@@ -102,7 +103,7 @@ Route::prefix('store')->group(function () {
       
    });
    
-   //brand
+   //public-discount_______________________________________________________________________________________
    Route::prefix('public-discount')->group(function () {
       
       Route::post('store',[PublicDiscountController::class,'store']);
@@ -111,6 +112,18 @@ Route::prefix('store')->group(function () {
       Route::put('{publicDiscount}',[PublicDiscountController::class,'update']);
       Route::delete('{publicDiscount}',[PublicDiscountController::class,'destroy']);
       Route::patch('toggle-status/{publicDiscount}',[PublicDiscountController::class,'toggle_status']);
+      
+   });
+   
+   //coupon-discount_______________________________________________________________________________________
+   Route::prefix('coupon-discount')->group(function () {
+      
+      Route::post('store',[CouponDiscountController::class,'store']);
+      Route::get('index',[CouponDiscountController::class,'index']);
+      Route::get('{couponDiscount}',[CouponDiscountController::class,'show']);
+      Route::put('{couponDiscount}',[CouponDiscountController::class,'update']);
+      Route::delete('{couponDiscount}',[CouponDiscountController::class,'destroy']);
+      Route::patch('toggle-status/{couponDiscount}',[CouponDiscountController::class,'toggle_status']);
       
    });
    
