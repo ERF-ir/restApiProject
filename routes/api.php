@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Content\BannerController;
 use App\Http\Controllers\Admin\Content\MenuController;
 use App\Http\Controllers\Admin\Content\PostController;
 use App\Http\Controllers\Admin\Store\BrandController;
+use App\Http\Controllers\Admin\Store\PublicDiscountController;
 use App\Models\Store\Brand;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -98,6 +99,18 @@ Route::prefix('store')->group(function () {
       Route::put('{brand}',[BrandController::class,'update']);
       Route::delete('{brand}',[BrandController::class,'destroy']);
       Route::patch('toggle-status/{brand}',[BrandController::class,'toggle_status']);
+      
+   });
+   
+   //brand
+   Route::prefix('public-discount')->group(function () {
+      
+      Route::post('store',[PublicDiscountController::class,'store']);
+      Route::get('index',[PublicDiscountController::class,'index']);
+      Route::get('{publicDiscount}',[PublicDiscountController::class,'show']);
+      Route::put('{publicDiscount}',[PublicDiscountController::class,'update']);
+      Route::delete('{publicDiscount}',[PublicDiscountController::class,'destroy']);
+      Route::patch('toggle-status/{publicDiscount}',[PublicDiscountController::class,'toggle_status']);
       
    });
    
