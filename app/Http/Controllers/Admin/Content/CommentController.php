@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Content;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\Content\CommentResource;
+use App\Models\Content\Comment;
+use App\Models\Content\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -12,7 +15,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::where('commentable_type',Post::class)->get();
+        return respons('comments',CommentResource::collection($comments));
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Content;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PostRequest;
 use App\Http\Resources\Admin\Content\PostResource;
-use App\Models\content\Post;
+use App\Models\Content\Post;
 use App\Services\ImageTools;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class PostController extends Controller
    
     public function index()
     {
-        $posts = Post::with('category','user')->get();
+        $posts = Post::with('category','user','comments')->get();
         return respons('success',PostResource::collection($posts));
     }
 
@@ -55,5 +55,12 @@ class PostController extends Controller
        $imageTools->deleteImage($post->image);
        $post->delete();
        return respons('deleted post successfully');
+    }
+    
+    public function toggle_status(Post $post)
+    {
+       $post->status = $post->status == 0 ? 1 : 0;
+       $post->save();
+       return respons('updated post successfully',new PostResource($post));
     }
 }

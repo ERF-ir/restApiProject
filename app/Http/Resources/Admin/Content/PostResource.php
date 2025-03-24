@@ -27,6 +27,14 @@ class PostResource extends JsonResource
           'user' => [
              'name' => $this->user->name,
           ],
+          'comments' => $this->comments->map(function ($comment) {
+             return [
+                'body' => $comment->body,
+                'created_at' => $comment->created_at,
+                'user' => $comment->user->name,
+                ];
+          })
+          
        ];
        
     }

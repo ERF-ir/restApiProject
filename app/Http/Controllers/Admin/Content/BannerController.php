@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Content;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\BannerRequest;
 use App\Http\Resources\Admin\Content\BannertResource;
-use App\Models\content\Banner;
+use App\Models\Content\Banner;
 use App\Services\ImageTools;
 use Illuminate\Http\Request;
 
@@ -67,4 +67,6 @@ class BannerController extends Controller
        $banner->delete();
        return respons('successful delete banner');
     }
+    
+    
 }

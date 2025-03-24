@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Content;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\MenuRequest;
 use App\Http\Resources\Admin\Content\MenuResource;
-use App\Models\content\Menu;
+use App\Models\Content\Menu;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -54,4 +54,11 @@ class MenuController extends Controller
         $menu->delete();
         return respons('Menu deleted successfully');
     }
+   
+   public function toggle_status(Menu $menu)
+   {
+      $menu->status = $menu->status == '0' ? '1' : '0';
+      $menu->save();
+      return respons('updated post successfully',new MenuResource($menu));
+   }
 }

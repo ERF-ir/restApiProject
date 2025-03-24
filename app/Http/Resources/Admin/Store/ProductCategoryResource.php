@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Admin\Content;
+namespace App\Http\Resources\Admin\Store;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CommentResource extends JsonResource
+class ProductCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,6 @@ class CommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-          
-          'name'=>
-          $this->name ?? '',
-           
-        ];
+        return parent::toArray($request);
     }
 }

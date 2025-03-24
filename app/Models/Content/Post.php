@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\content;
+namespace App\Models\Content;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -20,9 +20,11 @@ class Post extends Model
        return $this->belongsTo(PostCategory::class,'category_id');
     }
     
-    public function tags()
+    public function comments()
     {
-    
+       return $this->morphMany(Comment::class,'commentable');
     }
+    
+   
     
 }

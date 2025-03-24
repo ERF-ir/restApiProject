@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Content;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Content\PostCategoryRequesr;
 use App\Http\Resources\Admin\Content\PostCategoryResource;
-use App\Models\content\PostCategory;
+use App\Models\Content\PostCategory;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
