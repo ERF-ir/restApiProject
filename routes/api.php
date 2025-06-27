@@ -12,6 +12,8 @@ use App\Models\Store\Brand;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Store\ProductController;
+
 
 
 use App\Http\Controllers\Admin\Store\ProductCategoryController;
@@ -28,6 +30,7 @@ Route::prefix('content')->group(function () {
         Route::get('{postCategory}',[PostCategoryController::class,'show']);
         Route::put('{postCategory}',[PostCategoryController::class,'update']);
         Route::delete('{postCategory}',[PostCategoryController::class,'destroy']);
+       Route::patch('{postCategory}/toggle-status',[PostCategoryController::class,'toggle_status']);
     });
     
     //posts_______________________________________________________________________________________
@@ -124,6 +127,16 @@ Route::prefix('store')->group(function () {
       Route::put('{couponDiscount}',[CouponDiscountController::class,'update']);
       Route::delete('{couponDiscount}',[CouponDiscountController::class,'destroy']);
       Route::patch('toggle-status/{couponDiscount}',[CouponDiscountController::class,'toggle_status']);
+      
+   });
+   Route::prefix('product')->group(function () {
+      
+      Route::post('store',[ProductController::class,'store']);
+      Route::get('index',[ProductController::class,'index']);
+      Route::get('{product}',[ProductController::class,'show']);
+      Route::put('{products}',[ProductController::class,'update']);
+      Route::delete('{products}',[ProductController::class,'destroy']);
+      Route::patch('toggle-status/{products}',[ProductController::class,'toggle_status']);
       
    });
    

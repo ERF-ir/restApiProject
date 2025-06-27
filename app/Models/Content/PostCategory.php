@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostCategory extends Model
 {
-    protected $fillable = ['slug','name','parent_id'];
+    protected $fillable = ['slug','name','parent_id','status'];
 
 
 
