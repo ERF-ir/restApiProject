@@ -10,12 +10,12 @@ class Product extends Model
     
     
     
-    public function categories()
+    public function category()
     {
-       return $this->hasOne(ProductCategory::class);
+       return $this->hasOne(ProductCategory::class,'id','category_id');
     }
-    public function brands()
+    public function brand()
     {
-       return $this->hasOne(Brand::class);
+       return $this->hasOne(Brand::class,'id','brand_id');
     }
 }

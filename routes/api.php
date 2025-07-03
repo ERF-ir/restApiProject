@@ -134,9 +134,9 @@ Route::prefix('store')->group(function () {
       Route::post('store',[ProductController::class,'store']);
       Route::get('index',[ProductController::class,'index']);
       Route::get('{product}',[ProductController::class,'show']);
-      Route::put('{products}',[ProductController::class,'update']);
-      Route::delete('{products}',[ProductController::class,'destroy']);
-      Route::patch('toggle-status/{products}',[ProductController::class,'toggle_status']);
+      Route::put('{product}',[ProductController::class,'update']);
+      Route::delete('{product}',[ProductController::class,'destroy']);
+      Route::patch('toggle-status/{product}',[ProductController::class,'toggle_status']);
       
    });
    
