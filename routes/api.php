@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Content\PostController;
 use App\Http\Controllers\Admin\Store\BrandController;
 use App\Http\Controllers\Admin\Store\CouponDiscountController;
 use App\Http\Controllers\Admin\Store\PublicDiscountController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Models\Store\Brand;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -97,7 +98,7 @@ Route::prefix('store')->group(function () {
    //brand_______________________________________________________________________________________
    Route::prefix('brand')->group(function () {
       
-      Route::post('store',[BrandController::class,'store']);
+      Route::post('store',[BrandController::class,'store'])->middleware('auth:sanctum');
       Route::get('index',[BrandController::class,'index']);
       Route::get('{brand}',[BrandController::class,'show']);
       Route::put('{brand}',[BrandController::class,'update']);
@@ -140,5 +141,25 @@ Route::prefix('store')->group(function () {
       
    });
    
+});
+
+
+
+
+
+Route::prefix('auth')->group(function () {
+   
+   Route::post('register',[AuthController::class,'register']);
+   Route::post('login',[AuthController::class,'login']);
+   Route::post('logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
    
 });
+
+
+
+
+
+
+
+
+
