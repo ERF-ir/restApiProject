@@ -24,7 +24,9 @@ class AuthController extends Controller
       $path = $imageTools->uploadImage($input['image'],'users');
       $input['image'] = $path;
       $input['password'] = Hash::make($input['password']);
+      
       $user =  User::create($input);
+      
       return respons('registered successfully',[
          'user' => $user
       ]);
@@ -62,5 +64,15 @@ class AuthController extends Controller
    {
       $request->user()->tokens()->delete();
       return respons('logged out successfully');
+   }
+   public function getMe(Request $request)
+   {
+      $user = $request->user();
+      return respons('user information',[
+         'image' => asset($user->image),
+         'name' => $user->name,
+         'email' => $user->email,
+         'created_at' => $user->created_at,
+      ]);
    }
 }
