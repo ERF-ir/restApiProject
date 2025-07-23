@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Store\ProductController;
+use App\Http\Controllers\Admin\Roles\RolesController;
 
 
 
@@ -156,6 +157,13 @@ Route::prefix('auth')->group(function () {
    
 });
 
+Route::prefix('manage-roles')->group(function () {
+   
+   Route::get('index',[RolesController::class,'index']);
+   Route::post('store',[RolesController::class,'store']);
+   Route::get('permissions',[RolesController::class,'permissions']);
+   
+});
 
 
 
