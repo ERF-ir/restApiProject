@@ -36,7 +36,7 @@ Route::prefix('content')->group(function () {
     });
     
     //posts_______________________________________________________________________________________
-    Route::prefix('post')->group(function () {
+    Route::prefix('post')->middleware(['auth:sanctum','permission:create-post'])->group(function () {
       
       Route::post('store',[PostController::class,'store']);
       Route::get('index',[PostController::class,'index']);
@@ -162,6 +162,14 @@ Route::prefix('manage-roles')->group(function () {
    Route::get('index',[RolesController::class,'index']);
    Route::post('store',[RolesController::class,'store']);
    Route::get('permissions',[RolesController::class,'permissions']);
+   
+});
+
+Route::prefix('users')->group(function () {
+   
+   Route::get('index',[\App\Http\Controllers\UserController::class,'index']);
+   Route::post('{user}',[\App\Http\Controllers\UserController::class,'roles_store']);
+ 
    
 });
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Roles\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,12 +27,33 @@ class User extends Authenticatable
        
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
+   
+    
+    
+    function roles()
+    {
+       return $this->belongsToMany(Role::class);
+       
+    }
+   
+   public function getRoleNamesAttribute()
+   {
+      return $this->roles->pluck('name')->implode(', ');
+   }
+   
+   
+   
+   public function hasPermission($permissionName)
+   {
+      foreach ($this->roles as $role) {
+         if ($role->permissions->contains('name', $permissionName)) {
+            return true;
+         }
+      }
+      return false;
+   }
+   
+   protected $hidden = [
         'password',
         'remember_token',
     ];

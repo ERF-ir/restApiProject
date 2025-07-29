@@ -8,6 +8,7 @@ use App\Http\Resources\Admin\Content\PostResource;
 use App\Models\Content\Post;
 use App\Services\ImageTools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
