@@ -36,4 +36,22 @@ class RolesController extends Controller
       return respons('list a permissions',$permissions);
    }
    
+   public function permissionsUser()
+   {
+      $user = auth()->user();
+      
+      // گرفتن نام همه دسترسی‌ها از نقش‌های کاربر
+      $permissionNames = $user->roles()
+         ->with('permissions')
+         ->get()
+         ->pluck('permissions')   // گرفتن فقط permissions
+         ->flatten()              // یکی کردن همه
+         ->pluck('name')          // فقط نام‌ها
+         ->unique()               // حذف تکراری‌ها
+         ->values();              // مرتب‌سازی ایندکس‌ها
+      
+      return response()->json([
+         'name' => $permissionNames
+      ]);
+      }
 }

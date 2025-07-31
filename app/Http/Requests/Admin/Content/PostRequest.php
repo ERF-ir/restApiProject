@@ -27,8 +27,7 @@ class PostRequest extends FormRequest
         if ($this->method() == 'POST') {
            return [
               'title' => 'required|string|max:255|min:5|unique:posts,title',
-              'body' => 'required|string|min:20|max:10000',
-              'summery' => 'required|string|min:20|max:10000',
+              
               'image' => 'required|image|mimes:jpeg,png,jpg|max:3048',
               'category_id' => 'required|exists:post_categories,id',
               'status' => 'required|in:0,1',

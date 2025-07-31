@@ -69,10 +69,13 @@ class AuthController extends Controller
    {
       $user = $request->user();
       return respons('user information',[
+         'id' => $user->id,
          'image' => asset($user->image),
          'name' => $user->name,
          'email' => $user->email,
          'created_at' => $user->created_at,
+         'roles' => $user->getRoleNamesAttribute()
+         
       ]);
    }
 }

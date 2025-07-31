@@ -25,7 +25,7 @@ use App\Http\Controllers\Admin\Store\ProductCategoryController;
 Route::prefix('content')->group(function () {
 
     //postCategory_______________________________________________________________________________________
-    Route::prefix('post-category')->group(function () {
+    Route::prefix('post-category')->middleware(['auth:sanctum','permission:manage-categories'])->group(function () {
       
         Route::post('store',[PostCategoryController::class,'store']);
         Route::get('index',[PostCategoryController::class,'index']);
@@ -36,7 +36,7 @@ Route::prefix('content')->group(function () {
     });
     
     //posts_______________________________________________________________________________________
-    Route::prefix('post')->middleware(['auth:sanctum','permission:create-post'])->group(function () {
+    Route::prefix('post')->middleware(['auth:sanctum','permission:manage-posts'])->group(function () {
       
       Route::post('store',[PostController::class,'store']);
       Route::get('index',[PostController::class,'index']);
@@ -109,7 +109,7 @@ Route::prefix('store')->group(function () {
    });
    
    //public-discount_______________________________________________________________________________________
-   Route::prefix('public-discount')->group(function () {
+   Route::prefix('public-discount')->middleware(['auth:sanctum','permission:manage-discounts'])->group(function () {
       
       Route::post('store',[PublicDiscountController::class,'store']);
       Route::get('index',[PublicDiscountController::class,'index']);
@@ -121,7 +121,7 @@ Route::prefix('store')->group(function () {
    });
    
    //coupon-discount_______________________________________________________________________________________
-   Route::prefix('coupon-discount')->group(function () {
+   Route::prefix('coupon-discount')->middleware(['auth:sanctum','permission:manage-discounts'])->group(function () {
       
       Route::post('store',[CouponDiscountController::class,'store']);
       Route::get('index',[CouponDiscountController::class,'index']);
@@ -131,7 +131,7 @@ Route::prefix('store')->group(function () {
       Route::patch('toggle-status/{couponDiscount}',[CouponDiscountController::class,'toggle_status']);
       
    });
-   Route::prefix('product')->group(function () {
+   Route::prefix('product')->middleware(['auth:sanctum','permission:manage-products'])->group(function () {
       
       Route::post('store',[ProductController::class,'store']);
       Route::get('index',[ProductController::class,'index']);
@@ -157,15 +157,16 @@ Route::prefix('auth')->group(function () {
    
 });
 
-Route::prefix('manage-roles')->group(function () {
+Route::prefix('manage-roles')->middleware(['auth:sanctum','permission:manage-roles'])->group(function () {
    
    Route::get('index',[RolesController::class,'index']);
    Route::post('store',[RolesController::class,'store']);
    Route::get('permissions',[RolesController::class,'permissions']);
    
 });
+   Route::get('manage-roles/permissions-user',[RolesController::class,'permissionsUser'])->middleware('auth:sanctum');
 
-Route::prefix('users')->group(function () {
+Route::prefix('users')->middleware(['auth:sanctum','permission:manage-admins'])->group(function () {
    
    Route::get('index',[\App\Http\Controllers\UserController::class,'index']);
    Route::post('{user}',[\App\Http\Controllers\UserController::class,'roles_store']);

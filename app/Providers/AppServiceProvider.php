@@ -20,8 +20,24 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('create-post', function ($user) {
-           return $user->hasPermission('create-post');
+        Gate::define('manage-posts', function ($user) {
+           return $user->hasPermission('manage-posts');
         });
+        Gate::define('manage-categories', function ($user) {
+           return $user->hasPermission('manage-categories');
+        });
+        Gate::define('manage-discounts', function ($user) {
+           return $user->hasPermission('manage-discounts');
+        });
+        Gate::define('manage-admins', function ($user) {
+           return $user->hasPermission('manage-admins');
+        });
+        Gate::define('manage-roles', function ($user) {
+           return $user->hasPermission('manage-roles');
+        });
+        Gate::define('manage-products', function ($user) {
+           return $user->hasPermission('manage-products');
+        });
+        
     }
 }

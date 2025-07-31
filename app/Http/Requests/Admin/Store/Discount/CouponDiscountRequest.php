@@ -34,7 +34,6 @@ class CouponDiscountRequest extends FormRequest
            'end_at' => 'required|date|date_format:Y-m-d H:i:s',
            'title' => 'required',
            'status' => 'required|in:1,0',
-           'user_id' => 'exists:users,id',
            'coupon_code' => 'required|max:15',
            'type' => 'required|in:1,0',
            
